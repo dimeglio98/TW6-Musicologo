@@ -1,0 +1,368 @@
+{
+  "info": {
+    "name": "Music API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "username",
+                  "value": "newuser",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password123",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/add/user",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["add", "user"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/get/user/newuser",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["get", "user", "newuser"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "password",
+                  "value": "newpassword",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/update/user/newuser",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["update", "user", "newuser"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/delete/user/newuser",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["delete", "user", "newuser"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Songs",
+      "item": [
+        {
+          "name": "Create Song",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Song1",
+                  "type": "text"
+                },
+                {
+                  "key": "artist",
+                  "value": "ArtistA",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/add/song",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["add", "song"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Song",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/get/song/Song1",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["get", "song", "Song1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Song",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "album",
+                  "value": "NewAlbum",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/update/song/Song1",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["update", "song", "Song1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Song",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/delete/song/Song1",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["delete", "song", "Song1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Albums",
+      "item": [
+        {
+          "name": "Create Album",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Album1",
+                  "type": "text"
+                },
+                {
+                  "key": "artist",
+                  "value": "ArtistA",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/add/album",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["add", "album"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Album",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/get/album/Album1",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["get", "album", "Album1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Album",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "artist",
+                  "value": "NewArtist",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/update/album/Album1",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["update", "album", "Album1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Album",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/delete/album/Album1",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["delete", "album", "Album1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Artists",
+      "item": [
+        {
+          "name": "Create Artist",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "ArtistA",
+                  "type": "text"
+                },
+                {
+                  "key": "surname",
+                  "value": "SurnameA",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/add/artist",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["add", "artist"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Artist",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/get/artist/ArtistA",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["get", "artist", "ArtistA"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Artist",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "surname",
+                  "value": "NewSurname",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/update/artist/ArtistA",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["update", "artist", "ArtistA"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Artist",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/delete/artist/ArtistA",
+              "protocol": "http",
+              "host": ["127", "0", "0", "1"],
+              "port": "5000",
+              "path": ["delete", "artist", "ArtistA"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
