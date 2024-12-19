@@ -1,0 +1,51 @@
+* {
+    font-family: sans-serif;
+}
+
+.loginbody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.form-wrapper{
+    background-color: crimson;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    border-radius: 10%;
+    flex-direction: column;
+}
+
+.homebody{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 95vh;
+    flex-direction: column;
+}
+
+iframe{
+    width: 100%;
+    height: 8%;
+    border: 0px;
+}
+
+#wrapper, #menu{
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    width: 100%;
+    align-items: center;
+}
+
+table{
+    border-spacing: 40px 15px;
+}
+
+th, td{
+    text-transform: capitalize;
+}

@@ -3,9 +3,13 @@ services:
     image: mongo
     restart: unless-stopped
     environment:
-      MONGODATA: "$PWD/mongodata"
+      PUID: 1000
+      PGID: 1000
+    volumes:
+      - ./mongodata:/data/db
     ports:
       - 27017:27017
+    command: --quiet
 
   engine:
     build: ./engine

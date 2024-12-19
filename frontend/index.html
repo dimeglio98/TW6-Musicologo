@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <title>Login Utente</title>
+    <script>
+      async function verificaLogin(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("user").value;
+        const password = document.getElementById("pass").value;
+
+        const url = "http://127.0.0.1:5000/login";
+        login = new FormData();
+        login.append("username", username);
+        login.append("password", password);
+
+        const response = await fetch(url, {
+          method: "POST",
+          body: login,
+        });
+
+        if (response.status == 200) {
+          window.location.href = "home.html";
+        } else {
+          alert("Utente e/o password non validi!");
+        }
+      }
+    </script>
+  </head>
+  <body class="loginbody">
+    <div class="form-wrapper">
+      <form onsubmit="verificaLogin(event)">
+        <h3>Login utente</h3>
+        <div class="form-item">
+          <input
+            type="text"
+            id="user"
+            required="required"
+            placeholder="Username"
+            autofocus
+          />
+        </div>
+        <div class="form-item">
+          <input
+            type="password"
+            id="pass"
+            required="required"
+            placeholder="Password"
+          />
+        </div>
+        <div class="button-panel">
+          <input type="submit" class="button" title="Log In" value="Login" />
+        </div>
+      </form>
+      <div class="reminder">
+        <p>Non sei registrato? <a href="#">Registrati ora!</a></p>
+      </div>
+    </div>
+  </body>
+</html>

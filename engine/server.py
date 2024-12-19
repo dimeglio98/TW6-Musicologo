@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, after_this_request
 from pymongo import MongoClient
 
 client = MongoClient("mongodb://mongodb/")
@@ -59,7 +59,7 @@ def delete_user(username):
 @app.route("/add/song", methods=["POST"])
 def add_song():
         jsondata = request.form
-        song = {"name": jsondata["name"], "artist": jsondata["artist"]}
+        song = {"name": jsondata["name"], "artist": jsondata["artist"], "album": jsondata["album"], "airings": jsondata["airings"], "posizione": jsondata["posizione"], "link": jsondata["link"]}
         res = songs.insert_one(song)
         return jsonify({"created song": str(res.inserted_id)})
 
@@ -97,10 +97,14 @@ def add_album():
 
 @app.route("/get/album/<album_name>", methods=["GET"])
 def get_album(album_name):
-    album = albums.find_one({"name": album_name})
+    @after_this_request
+    def add_header(response):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
+    album = songs.find({"album": album_name}, {'_id': 0}) #con la seconda {} sto disabilitando la visione dell'id perche problematica nel return
     if album:
-        album["_id"] = str(album["_id"])
-        return jsonify(album)
+        return jsonify(list(album))
     return jsonify({"message": "Album not found"}), 404
 
 @app.route("/update/album/<album_name>", methods=["POST"])
@@ -153,9 +157,14 @@ def delete_artist(artist_name):
 
 @app.route("/login", methods=["POST"])
 def login():
+    @after_this_request
+    def add_header(response):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+    
     jsondata = request.form
     user = users.find_one({"username": jsondata["username"], "password": jsondata["password"]})
     if user:
-        return {"login": str(user.inserted_id)}, 200
+        return {"login": str(user["_id"])}, 200 #restituisco id utente, data la somiglianza a un hash sembra comodo
     return jsonify({"message": "user not found"}), 401 
 
