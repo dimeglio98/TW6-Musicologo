@@ -1,22 +1,210 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background-color: #f4f4f9;
+        }
 
-    <title>Login Utente</title>
-  </head>
-  <body class="homebody">
-    <iframe src="header.html" seamless></iframe>
+        div {
+            margin-bottom: 50px;
+        }
+
+        /* Contenitore per le immagini */
+        .carousel {
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px; /* Aggiunge angoli arrotondati */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra */
+        }
+
+        /* Imposta le immagini in linea per il carosello */
+        .carousel-images {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Pulsanti per navigazione */
+        .carousel-prev,
+        .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 25px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            z-index: 1;
+        }
+
+        .carousel-prev:hover,
+        .carousel-next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-prev {
+            left: 20px;
+        }
+
+        .carousel-next {
+            right: 20px;
+        }
+
+        /* Header */
+        iframe {
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        footer ul li {
+            margin: 0 20px;
+        }
+
+        footer ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        footer ul li a:hover {
+            color: #ff6347;
+        }
+
+        footer p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* Media Query per dispositivi piccoli */
+        @media (max-width: 768px) {
+            .carousel-images img {
+                height: 300px;
+            }
+            footer {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <iframe src="header.html" seamless width="100%" height="150px"></iframe>
     <div>
-      <h2>Benvenuto, cosa vuoi fare oggi?</h2>
+        <h2>Benvenuto in Feltrinelli Music</h2>
+
+        <h3 style="font-size: 14px;">Qui troverai tutte le informazioni che servono per i concerti e le migliori 5 canzoni del mese</h3>
     </div>
-    <image
-      src="https://www.true-news.it/wp-content/uploads/2022/03/TRUE-1200X675-10-8-860x484.jpg"
-      alt="home"
-    >
-    </image>
-  </body>
+
+    <!-- Contenitore del carosello -->
+    <div class="carousel">
+        <div class="carousel-images">
+            <img src="https://dealrocket.it/wp-content/uploads/2024/10/lafeltrinelli_card.png" alt="image3">
+            <img src="https://www.true-news.it/wp-content/uploads/2022/03/TRUE-1200X675-10-8-860x484.jpg" alt="home">
+            <img src="https://www.nico.it/media/2024/03/come-vestirsi-per-un-concerto_831548.jpg?w=1920&h=1000&" alt="image2">
+        </div>
+        <!-- Pulsanti per la navigazione -->
+        <button class="carousel-prev">&#10094;</button>
+        <button class="carousel-next">&#10095;</button>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelector('.carousel-images');
+        const totalImages = document.querySelectorAll('.carousel-images img').length;
+        const prevButton = document.querySelector('.carousel-prev');
+        const nextButton = document.querySelector('.carousel-next');
+
+        // Funzione per cambiare immagine
+        function changeImage() {
+            images.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Funzione per scorrere l'immagine precedente
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            changeImage();
+        }
+
+        // Funzione per scorrere l'immagine successiva
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % totalImages;
+            changeImage();
+        }
+
+        // Cambia immagine ogni 3 secondi automaticamente
+        let autoScroll = setInterval(nextImage, 3000);
+
+        // Interrompe lo scorrimento automatico quando si interagisce
+        function resetAutoScroll() {
+            clearInterval(autoScroll);
+            autoScroll = setInterval(nextImage, 3000); // Riprende il timer dopo l'interazione
+        }
+
+        // Aggiungi gli eventi per i pulsanti
+        prevButton.addEventListener('click', () => {
+            prevImage();
+            resetAutoScroll(); // Ripristina il timer
+        });
+
+        nextButton.addEventListener('click', () => {
+            nextImage();
+            resetAutoScroll(); // Ripristina il timer
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <ul>
+          <li><a href="https://www.lafeltrinelli.it/contattaci">Contatti</a></li>
+          <li><a href="https://www.lafeltrinelli.it/assistenza">Privacy</a></li>
+          <li><a href="https://www.gruppofeltrinelli.it/chi-siamo/">Chi siamo?</a></li>
+        </ul>
+        <p>&copy; 2024 Feltrinelli Music. Tutti i diritti riservati.</p>
+    </footer>
+</body>
 </html>

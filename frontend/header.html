@@ -1,38 +1,94 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" href="img/favicon.png" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="img/favicon.png">
     <title>Feltrinelli Music</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div id="wrapper">
-      <div id="header">
-        <img
-          src="favicon.ico"
-          alt="Logo Feltrinelli"
-          width="50"
-          height="50"
-        />
-      </div>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-      <div id="menu">
-        <div style="display: flex; flex-direction: row;">
-          <!-- Form statico senza azione verso il backend -->
-          <input type="text" placeholder="Artisti, Album, Canzoni" disabled />
-          <button disabled>CERCA</button>
+        #wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #menu {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #menu ul li {
+            margin-right: 15px;
+        }
+
+        #menu ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        #header {
+            width: 100%;
+        }
+
+        #header img {
+            width: 100%; /* Imposta l'immagine per occupare tutta la larghezza */
+            height: auto;
+        }
+
+        /* Modifiche per l'immagine nell'header */
+        .image-container {
+            width: 100%; /* Usa la larghezza completa della pagina */
+            height: 200px; /* Imposta l'altezza del div (puoi regolare questo valore) */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Aggiungi un colore di sfondo se desideri */
+        }
+
+        .logo {
+            width: 80%; /* L'immagine occuperà l'80% della larghezza del div */
+            max-width: 1500px; /* Imposta una larghezza massima per l'immagine */
+            height: auto; /* Mantiene le proporzioni dell'immagine */
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="menu">
+            <ul>
+                <li>
+              
+                </li>
+                <li><a href="home.html" target="_parent">HOME</a></li>
+                <li><a href="Classifica.html" target="_parent">CLASSIFICA</a></li>
+                <li><a href="concerti.html" target="_parent">CONCERTI</a></li>
+                                <li><a href="index.html" target="_parent">ESCI</a></li>
+
+            </ul>
         </div>
-        <a href="home.html" target="_parent">HOME</a>
-        <a href="artisti.html" target="_parent">ARTISTI</a>
-        <a href="album.html" target="_parent">ALBUM</a>
-        <a href="lista.html" target="_parent">CANZONI</a>
-        <a href="classifica.html" target="_parent">CLASSIFICA</a>
-        
-      </div>
-      <a href="index.html" target="_parent" style="display: flex; justify-content: end;">ESCI</a>
+
+    
+
     </div>
-  </body>
+</body>
 </html>
