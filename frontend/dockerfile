@@ -1,0 +1,5 @@
+FROM node:lts-alpine
+
+WORKDIR /frontend
+COPY . ./
+CMD ["npx", "serve"]

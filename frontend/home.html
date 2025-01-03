@@ -1,210 +1,214 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
-    <title>Home</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="musicologo.png" />
+    <title>Feltrinelli Music - Home</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-            background-color: #f4f4f9;
-        }
+      body {
+        overflow-x: hidden;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        text-align: center;
+        background: linear-gradient(to bottom, #e6e6e6, #ffffff);
+        color: #333;
+      }
 
-        div {
-            margin-bottom: 50px;
-        }
+      div {
+        margin-bottom: 50px;
+      }
 
-        /* Contenitore per le immagini */
-        .carousel {
-            width: 100%;
-            max-width: 1000px;
-            overflow: hidden;
-            position: relative;
-            border-radius: 10px; /* Aggiunge angoli arrotondati */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra */
-        }
+      .carousel {
+        width: 90%;
+        max-width: 1200px;
+        overflow: hidden;
+        position: relative;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
 
-        /* Imposta le immagini in linea per il carosello */
-        .carousel-images {
-            display: flex;
-            transition: transform 1s ease;
-        }
+      .carousel-images {
+        display: flex;
+        transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+      }
 
+      .carousel-images img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 15px;
+      }
+
+      .carousel-prev,
+      .carousel-next {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        top: 50%;
+        text-align: center;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #333;
+        border: none;
+        cursor: pointer;
+        font-size: 30px;
+        border-radius: 50%;
+        transition: background-color 0.3s;
+        z-index: 2;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .carousel-prev:hover,
+      .carousel-next:hover {
+        background-color: #d9d9d9;
+      }
+
+      .carousel-prev {
+        left: 10px;
+      }
+
+      .carousel-next {
+        right: 10px;
+      }
+
+      iframe {
+        border: none;
+      }
+
+      footer {
+        width: 100%;
+        background-color: #f4f4f4;
+        color: #555;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      footer ul li {
+        margin: 0 15px;
+      }
+
+      footer ul li a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+
+      footer ul li a:hover {
+        color: #666;
+      }
+
+      footer p {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #777;
+      }
+
+      @media (max-width: 768px) {
         .carousel-images img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        /* Pulsanti per navigazione */
-        .carousel-prev,
-        .carousel-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-            font-size: 25px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-            z-index: 1;
-        }
-
-        .carousel-prev:hover,
-        .carousel-next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .carousel-prev {
-            left: 20px;
-        }
-
-        .carousel-next {
-            right: 20px;
-        }
-
-        /* Header */
-        iframe {
-            border: none;
-        }
-
-        /* Footer */
-        footer {
-            width: 100%;
-            background-color: #333;
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+          height: 300px;
         }
 
         footer ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
+          flex-direction: column;
+          gap: 10px;
         }
-
-        footer ul li {
-            margin: 0 20px;
-        }
-
-        footer ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        footer ul li a:hover {
-            color: #ff6347;
-        }
-
-        footer p {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        /* Media Query per dispositivi piccoli */
-        @media (max-width: 768px) {
-            .carousel-images img {
-                height: 300px;
-            }
-            footer {
-                padding: 20px;
-            }
-        }
-
+      }
     </style>
-</head>
-<body>
-    <iframe src="header.html" seamless width="100%" height="150px"></iframe>
-    <div>
-        <h2>Benvenuto in Feltrinelli Music</h2>
+  </head>
+  <body>
+    <iframe src="header.html" width="100%" height="35px"></iframe>
 
-        <h3 style="font-size: 14px;">Qui troverai tutte le informazioni che servono per i concerti e le migliori 5 canzoni del mese</h3>
+    <div>
+      <h1>Benvenuto in Musicologo</h1>
+      <h3>
+        Scopri tutto sui concerti e ascolta le migliori 5 canzoni del mese
+      </h3>
     </div>
 
-    <!-- Contenitore del carosello -->
     <div class="carousel">
-        <div class="carousel-images">
-            <img src="https://dealrocket.it/wp-content/uploads/2024/10/lafeltrinelli_card.png" alt="image3">
-            <img src="https://www.true-news.it/wp-content/uploads/2022/03/TRUE-1200X675-10-8-860x484.jpg" alt="home">
-            <img src="https://www.nico.it/media/2024/03/come-vestirsi-per-un-concerto_831548.jpg?w=1920&h=1000&" alt="image2">
-        </div>
-        <!-- Pulsanti per la navigazione -->
-        <button class="carousel-prev">&#10094;</button>
-        <button class="carousel-next">&#10095;</button>
+      <div class="carousel-images">
+        <img
+          src="https://us.123rf.com/450wm/tony98/tony981507/tony98150700091/42210932-musica.jpg?ver=6"
+          alt="Concert 1"
+        />
+        <img
+          src="https://www.true-news.it/wp-content/uploads/2022/03/TRUE-1200X675-10-8-860x484.jpg"
+          alt="Concert 2"
+        />
+        <img
+          src="https://www.nico.it/media/2024/03/come-vestirsi-per-un-concerto_831548.jpg?w=1920&h=1000&"
+          alt="Concert 3"
+        />
+      </div>
+      <button class="carousel-prev">&#10094;</button>
+      <button class="carousel-next">&#10095;</button>
     </div>
 
     <script>
-        let currentIndex = 0;
-        const images = document.querySelector('.carousel-images');
-        const totalImages = document.querySelectorAll('.carousel-images img').length;
-        const prevButton = document.querySelector('.carousel-prev');
-        const nextButton = document.querySelector('.carousel-next');
+      let currentIndex = 0;
+      const images = document.querySelector(".carousel-images");
+      const totalImages = document.querySelectorAll(
+        ".carousel-images img"
+      ).length;
+      const prevButton = document.querySelector(".carousel-prev");
+      const nextButton = document.querySelector(".carousel-next");
 
-        // Funzione per cambiare immagine
-        function changeImage() {
-            images.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
+      function changeImage() {
+        images.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
 
-        // Funzione per scorrere l'immagine precedente
-        function prevImage() {
-            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-            changeImage();
-        }
+      function prevImage() {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        changeImage();
+      }
 
-        // Funzione per scorrere l'immagine successiva
-        function nextImage() {
-            currentIndex = (currentIndex + 1) % totalImages;
-            changeImage();
-        }
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        changeImage();
+      }
 
-        // Cambia immagine ogni 3 secondi automaticamente
-        let autoScroll = setInterval(nextImage, 3000);
+      let autoScroll = setInterval(nextImage, 3000);
 
-        // Interrompe lo scorrimento automatico quando si interagisce
-        function resetAutoScroll() {
-            clearInterval(autoScroll);
-            autoScroll = setInterval(nextImage, 3000); // Riprende il timer dopo l'interazione
-        }
+      function resetAutoScroll() {
+        clearInterval(autoScroll);
+        autoScroll = setInterval(nextImage, 3000);
+      }
 
-        // Aggiungi gli eventi per i pulsanti
-        prevButton.addEventListener('click', () => {
-            prevImage();
-            resetAutoScroll(); // Ripristina il timer
-        });
+      prevButton.addEventListener("click", () => {
+        prevImage();
+        resetAutoScroll();
+      });
 
-        nextButton.addEventListener('click', () => {
-            nextImage();
-            resetAutoScroll(); // Ripristina il timer
-        });
+      nextButton.addEventListener("click", () => {
+        nextImage();
+        resetAutoScroll();
+      });
     </script>
 
-    <!-- Footer -->
     <footer>
-        <ul>
-          <li><a href="https://www.lafeltrinelli.it/contattaci">Contatti</a></li>
-          <li><a href="https://www.lafeltrinelli.it/assistenza">Privacy</a></li>
-          <li><a href="https://www.gruppofeltrinelli.it/chi-siamo/">Chi siamo?</a></li>
-        </ul>
-        <p>&copy; 2024 Feltrinelli Music. Tutti i diritti riservati.</p>
+      <ul>
+        <li><a href="#">Contatti</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Chi siamo?</a></li>
+      </ul>
+      <p>&copy; 2025 Tutti i diritti riservati.</p>
     </footer>
-</body>
+  </body>
 </html>

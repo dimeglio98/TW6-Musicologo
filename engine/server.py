@@ -5,8 +5,7 @@ client = MongoClient("mongodb://mongodb/")
 db = client["musicologo"]
 users = db["users"] 
 songs = db["songs"] 
-albums = db["albums"] 
-artists = db["artists"] 
+concerts = db["concerts"] 
 
 app = Flask(__name__)
 
@@ -23,7 +22,7 @@ def root():
     '''
     return html
 
-#crud per artisti, canzoni, album e utenti
+#crud per concerti, canzoni e utenti
 @app.route("/add/user", methods=["POST"])
 def add_user():
         jsondata = request.form
@@ -59,19 +58,34 @@ def delete_user(username):
 @app.route("/add/song", methods=["POST"])
 def add_song():
         jsondata = request.form
-        song = {"name": jsondata["name"], "artist": jsondata["artist"], "album": jsondata["album"], "airings": jsondata["airings"], "posizione": jsondata["posizione"], "link": jsondata["link"]}
+        song = {"title": jsondata["title"], "artist": jsondata["artist"], "discohouse": jsondata["discohouse"], "year": jsondata["year"], "posizione": jsondata["posizione"], "link": jsondata["link"]}
         res = songs.insert_one(song)
         return jsonify({"created song": str(res.inserted_id)})
 
-@app.route("/get/song/<song_name>", methods=["GET"])  # Changed to search by name
+@app.route("/get/song/<song_name>", methods=["GET"])
 def get_song(song_name):
-    song = songs.find_one({"name": song_name})
+    song = songs.find_one({"title": song_name})
     if song:
         song["_id"] = str(song["_id"])
         return jsonify(song)
     return jsonify({"message": "Song not found"}), 404
 
-@app.route("/update/song/<song_name>", methods=["POST"]) # Changed to update by name
+@app.route("/get/songs", methods=["GET"])
+def get_all_song():
+    @after_this_request
+    def add_header(response):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
+    song = songs.find()
+    if song:
+        song = list(song)
+        for singlesong in song:
+            singlesong["_id"] = str(singlesong["_id"])
+        return jsonify(song)
+    return jsonify({"message": "Song not found"}), 404
+
+@app.route("/update/song/<song_name>", methods=["POST"])
 def update_song(song_name):
     jsondata = request.form
     updated_song = {"$set": {"name": jsondata["name"], "artist": jsondata["artist"]}}
@@ -80,7 +94,7 @@ def update_song(song_name):
         return jsonify({"message": "Song updated"})
     return jsonify({"message": "Song not found or no changes made"}), 404
 
-@app.route("/delete/song/<song_name>", methods=["POST"]) # Changed to delete by name
+@app.route("/delete/song/<song_name>", methods=["POST"])
 def delete_song(song_name):
     res = songs.delete_one({"name": song_name})
     if res.deleted_count > 0:
@@ -88,72 +102,36 @@ def delete_song(song_name):
     return jsonify({"message": "Song not found"}), 404
 
 
-@app.route("/add/album", methods=["POST"])
-def add_album():
-        jsondata = request.form
-        album = {"name": jsondata["name"], "artist": jsondata["artist"]}
-        res = albums.insert_one(album)
-        return jsonify({"created album": str(res.inserted_id)})
-
-@app.route("/get/album/<album_name>", methods=["GET"])
-def get_album(album_name):
-    @after_this_request
-    def add_header(response):
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
-
-    album = songs.find({"album": album_name}, {'_id': 0}) #con la seconda {} sto disabilitando la visione dell'id perche problematica nel return
-    if album:
-        return jsonify(list(album))
-    return jsonify({"message": "Album not found"}), 404
-
-@app.route("/update/album/<album_name>", methods=["POST"])
-def update_album(album_name):
-    jsondata = request.form
-    updated_album = {"$set": {"name": jsondata["name"], "artist": jsondata["artist"]}}
-    res = albums.update_one({"name": album_name}, updated_album)
-    if res.modified_count > 0:
-        return jsonify({"message": "Album updated"})
-    return jsonify({"message": "Album not found or no changes made"}), 404
-
-@app.route("/delete/album/<album_name>", methods=["POST"])
-def delete_album(album_name):
-    res = albums.delete_one({"name": album_name})
-    if res.deleted_count > 0:
-        return jsonify({"message": "Album deleted"})
-    return jsonify({"message": "Album not found"}), 404
-
-
-@app.route("/add/artist", methods=["POST"])
+@app.route("/add/concert", methods=["POST"])
 def add_artist():
         jsondata = request.form
-        artist = {"name": jsondata["name"], "surname": jsondata["surname"]}
-        res = artists.insert_one(artist)
-        return jsonify({"created artist": str(res.inserted_id)})
+        artist = {"data": jsondata["data"], "artista": jsondata["artista"], "luogo": jsondata["luogo"], "link": jsondata["link"], "foto": jsondata["foto"]}
+        res = concerts.insert_one(artist)
+        return jsonify({"created Concert": str(res.inserted_id)})
 
-@app.route("/get/artist/<artist_name>", methods=["GET"])
-def get_artist(artist_name):
-    artist = artists.find_one({"name": artist_name})
-    if artist:
-        artist["_id"] = str(artist["_id"])
-        return jsonify(artist)
-    return jsonify({"message": "Artist not found"}), 404
+@app.route("/get/concert/<artist_name>", methods=["GET"])
+def get_concerts(artist_name):
+    concert = concerts.find_one({"artista": artist_name})
+    if concert:
+        concert["_id"] = str(concert["_id"])
+        return jsonify(concert)
+    return jsonify({"message": "Concert not found"}), 404
 
-@app.route("/update/artist/<artist_name>", methods=["POST"])
-def update_artist(artist_name):
+@app.route("/update/concert/<data>", methods=["POST"])
+def update_concert(data):
     jsondata = request.form
-    updated_artist = {"$set": {"name": jsondata["name"], "surname": jsondata["surname"]}}
-    res = artists.update_one({"name": artist_name}, updated_artist)
+    updated_concert = {"$set": {"artista": jsondata["artista"], "luogo": jsondata["luogo"], "artista": jsondata["data"]}}
+    res = concerts.update_one({"data": data}, updated_concert)
     if res.modified_count > 0:
-        return jsonify({"message": "Artist updated"})
-    return jsonify({"message": "Artist not found or no changes made"}), 404
+        return jsonify({"message": "Concert updated"})
+    return jsonify({"message": "Concert not found or no changes made"}), 404
 
-@app.route("/delete/artist/<artist_name>", methods=["POST"])
-def delete_artist(artist_name):
-    res = artists.delete_one({"name": artist_name})
+@app.route("/delete/concert/<data>", methods=["POST"])
+def delete_concert(data):
+    res = concerts.delete_one({"data": data})
     if res.deleted_count > 0:
-        return jsonify({"message": "Artist deleted"})
-    return jsonify({"message": "Artist not found"}), 404
+        return jsonify({"message": "Concert deleted"})
+    return jsonify({"message": "Concert not found"}), 404
 
 @app.route("/login", methods=["POST"])
 def login():

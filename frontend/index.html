@@ -1,174 +1,189 @@
 ﻿<!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
-    <title>Login Utente</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="musicologo.png" />
+    <title>Musicologo Login</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #ff4b5c, #ff7f8f);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(45deg, #ff4b5c, #ff7f8f);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
 
+      .form-wrapper {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 40px 50px;
+        border-radius: 10px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        width: 400px;
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      h3 {
+        color: #ffffff;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .form-item {
+        margin: 15px 0;
+      }
+
+      .form-item input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 2px solid #ffffff;
+        background: transparent;
+        color: white;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-item input:focus {
+        outline: none;
+        border-color: #ff4b5c;
+      }
+
+      .button-panel {
+        margin-top: 20px;
+      }
+
+      .button-panel input {
+        background: #ff4b5c;
+        border: none;
+        padding: 14px 20px;
+        width: 100%;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .button-panel input:hover {
+        background: #ff7f8f;
+      }
+
+      .reminder {
+        margin-top: 20px;
+        font-size: 0.9rem;
+      }
+
+      .reminder a {
+        color: #ff4b5c;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .reminder a:hover {
+        color: #ffffff;
+      }
+
+      /* Animazioni */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .form-wrapper {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 40px 50px;
-            border-radius: 10px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-            width: 400px;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
+          width: 80%;
+          padding: 30px;
         }
-
-        h3 {
-            color: #ffffff;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-item {
-            margin: 15px 0;
-        }
-
-        .form-item input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 2px solid #ffffff;
-            background: transparent;
-            color: white;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-item input:focus {
-            outline: none;
-            border-color: #ff4b5c;
-        }
-
-        .button-panel {
-            margin-top: 20px;
-        }
-
-        .button-panel input {
-            background: #ff4b5c;
-            border: none;
-            padding: 14px 20px;
-            width: 100%;
-            font-size: 1.1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .button-panel input:hover {
-            background: #ff7f8f;
-        }
-
-        .reminder {
-            margin-top: 20px;
-            font-size: 0.9rem;
-        }
-
-        .reminder a {
-            color: #ff4b5c;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .reminder a:hover {
-            color: #ffffff;
-        }
-
-        /* Animazioni */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .form-wrapper {
-                width: 80%;
-                padding: 30px;
-            }
-        }
+      }
     </style>
     <script>
-        async function getData(username, password) {
-            const url = "http://127.0.0.1:5000/login";
-            try {
-                let login = new FormData();
-                login.append("username", username);
-                login.append("password", password);
+      async function getData(username, password) {
+        const url = "http://127.0.0.1:5000/login";
+        try {
+          let login = new FormData();
+          login.append("username", username);
+          login.append("password", password);
 
-                const response = await fetch(url, {mode: 'no-cors', method: "POST", body: login});
-                
-                if (!response.ok) {
-                    throw new Error(`Response status: ${response.status}`);
-                }
+          const response = await fetch(url, {
+            mode: "no-cors",
+            method: "POST",
+            body: login,
+          });
 
-                const json = await response.json();
-                return true;
-            } catch (error) {
-                console.error(error.message);
-                return false;
-            }
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+          }
+
+          const json = await response.json();
+          return true;
+        } catch (error) {
+          console.error(error.message);
+          return false;
         }
+      }
 
-        function verificaLogin(event) {
-            event.preventDefault();
+      function verificaLogin(event) {
+        event.preventDefault();
 
-            const username = document.getElementById("user").value;
-            const password = document.getElementById("pass").value;
+        const username = document.getElementById("user").value;
+        const password = document.getElementById("pass").value;
 
-            if (getData(username, password)) {
-                alert("Login effettuato con successo!");
-                window.location.href = "home.html"; 
-            } else {
-                alert("Utente e/o password non validi!");
-            }
+        if (getData(username, password)) {
+          alert("Login effettuato con successo!");
+          window.location.href = "home.html";
+        } else {
+          alert("Utente e/o password non validi!");
         }
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="form-wrapper">
-        <form onsubmit="verificaLogin(event)">
-            <h3>Login utente</h3>
-            <div class="form-item">
-                <input type="text" id="user" required="required" placeholder="Username" autofocus>
-            </div>
-            <div class="form-item">
-                <input type="password" id="pass" required="required" placeholder="Password">
-            </div>
-            <div class="button-panel">
-                <input type="submit" class="button" title="Log In" value="Login">
-            </div>
-        </form>
-        <div class="reminder">
-            <p>Non sei registrato? <a href="#">Registrati ora!</a></p>
+      <form onsubmit="verificaLogin(event)">
+        <h3>Login utente</h3>
+        <div class="form-item">
+          <input
+            type="text"
+            id="user"
+            required="required"
+            placeholder="Username"
+            autofocus
+          />
         </div>
+        <div class="form-item">
+          <input
+            type="password"
+            id="pass"
+            required="required"
+            placeholder="Password"
+          />
+        </div>
+        <div class="button-panel">
+          <input type="submit" class="button" title="Log In" value="Login" />
+        </div>
+      </form>
+      <div class="reminder">
+        <p>Non sei registrato? <a href="#">Registrati ora!</a></p>
+      </div>
     </div>
-</body>
+  </body>
 </html>

@@ -1,194 +1,225 @@
 ﻿<!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Classifica</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="musicologo.png" />
+    <title>Classifica Musicale</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            margin: 0;
-            background-color: #f9f9f9;
-            color: #333;
-            text-align: center;
-        }
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: linear-gradient(to bottom, #333, #555, #f9f9f9);
+        color: #333;
+      }
 
-        /* Header */
-        header {
-            width: 100%;
-            background-color: #333;
-            color: white;
-            padding: 15px 0;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+      header {
+        background-color: #1e1e1e;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-        }
+      header h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        animation: fadeIn 2s ease-in-out;
+      }
 
+      h2 {
+        font-size: 1.6rem;
+        color: white;
+        margin: 30px 0 20px;
+        text-align: center;
+      }
+
+      table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      td {
+        padding: 5px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #222;
+        color: white;
+        font-size: 1.2rem;
+        padding: 15px;
+      }
+
+      td {
+        background-color: #f9f9f9;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f3f3f3;
+      }
+
+      tr:hover {
+        background-color: #eaeaea;
+      }
+
+      td iframe {
+        border: none;
+        border-radius: 8px;
+        width: 100%;
+        height: 100px;
+      }
+
+      footer {
+        background-color: #1e1e1e;
+        color: white;
+        padding: 15px 0;
+        text-align: center;
+        margin-top: 30px;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      footer a {
+        color: #ff6347;
+        text-decoration: none;
+        margin: 0 5px;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
         h2 {
-            margin-top: 20px;
-            font-size: 2.5rem;
-            color: #222;
+          font-size: 2rem;
         }
 
         table {
-            width: 80%;
-            margin: 20px 0;
-            border-collapse: collapse;
-            text-align: left;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            border-radius: 8px;
-        }
-
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #333;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        td {
-            background-color: #f9f9f9;
+          font-size: 0.9rem;
         }
 
         td iframe {
-            border-radius: 12px;
-            width: 100%;
-            height: 352px;
-            margin-bottom: 15px;
+          height: 80px;
         }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        footer {
-            width: 100%;
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-        }
-
-        footer p {
-            font-size: 14px;
-            color: #ccc;
-            margin-top: 10px;
-        }
-
-        footer a {
-            color: #ff6347;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            table {
-                width: 95%;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <iframe src="header.html" seamless width="100%" height="50px"></iframe>
+  </head>
+  <body>
+    <iframe
+      src="header.html"
+      seamless
+      width="100%"
+      height="35px"
+      style="border: none"
+    ></iframe>
 
     <header>
-        <h1>Classifica Musicale</h1>
+      <h1>Classifica Musicale</h1>
     </header>
 
     <h2>Top 5 Canzoni del Momento</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Posizione</th>
-                <th>Titolo</th>
-                <th>Artista</th>
-                <th>Casa Discografica</th>
-                <th>Anno</th>
-                <th>Ascolta</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>TU ED IO</td>
-                <td>GEOLIER</td>
-                <td>UNIVERSAL</td>
-                <td>2024</td>
-                <td>
-                    <iframe src="https://open.spotify.com/embed/track/7pQA55G6kvMIaNU4UcYktA?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>MAI PER SEMPRE</td>
-                <td>GEOLIER</td>
-                <td>UNIVERSAL</td>
-                <td>2024</td>
-                <td>
-                    <iframe src="https://open.spotify.com/embed/track/7u4Y70JYM5AO3Q45whDJbB?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>E' FINITA LA PACE</td>
-                <td>MARRACASH</td>
-                <td>UNIVERSAL</td>
-                <td>2024</td>
-                <td>
-                    <iframe src="https://open.spotify.com/embed/track/6hBvXhUosokAqnc701pVE1?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>AGAIN</td>
-                <td>PINO DANIELE</td>
-                <td>SONY MUSIC</td>
-                <td>2024</td>
-                <td>
-                    <iframe src="https://open.spotify.com/embed/track/7hYAg4ySTj8k6p1PaHWYEj?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>MANY MAN</td>
-                <td>50 CENT</td>
-                <td>WARNER</td>
-                <td>2003</td>
-                <td>
-                    <iframe src="https://open.spotify.com/embed/track/5STdMlrBf6pqWiNE7WqxSi?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </td>
-            </tr>
-        </tbody>
+    <table id="music-table">
+      <thead>
+        <tr>
+          <th>Posizione</th>
+          <th>Titolo</th>
+          <th>Artista</th>
+          <th>Casa Discografica</th>
+          <th>Anno</th>
+          <th>Ascolta</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
     </table>
 
     <footer>
-        <p>&copy; 2024 La Tua Classifica Musicale | <a href="#">Privacy</a> | <a href="#">Termini e Condizioni</a></p>
+      <p>
+        &copy; 2025 Classifica Musicale | <a href="#">Privacy</a> |
+        <a href="#">Termini e Condizioni</a>
+      </p>
     </footer>
-</body>
+
+    <script>
+      const songs = [
+        {
+          position: 1,
+          title: "Tu ed Io",
+          artist: "Geolier",
+          label: "Universal",
+          year: 2024,
+          link: "https://open.spotify.com/embed/track/7pQA55G6kvMIaNU4UcYktA?utm_source=generator",
+        },
+        {
+          position: 2,
+          title: "Mai per Sempre",
+          artist: "Geolier",
+          label: "Universal",
+          year: 2024,
+          link: "https://open.spotify.com/embed/track/7u4Y70JYM5AO3Q45whDJbB?utm_source=generator",
+        },
+        {
+          position: 3,
+          title: "È Finita la Pace",
+          artist: "Marracash",
+          label: "Universal",
+          year: 2024,
+          link: "https://open.spotify.com/embed/track/6hBvXhUosokAqnc701pVE1?utm_source=generator",
+        },
+        {
+          position: 4,
+          title: "Again",
+          artist: "Pino Daniele",
+          label: "Sony Music",
+          year: 2024,
+          link: "https://open.spotify.com/embed/track/7hYAg4ySTj8k6p1PaHWYEj?utm_source=generator",
+        },
+        {
+          position: 5,
+          title: "Many Men",
+          artist: "50 Cent",
+          label: "Warner",
+          year: 2003,
+          link: "https://open.spotify.com/embed/track/5STdMlrBf6pqWiNE7WqxSi?utm_source=generator",
+        },
+      ];
+
+      const tableBody = document.querySelector("#music-table tbody");
+
+      songs.forEach((song) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+                <td>${song.position}</td>
+                <td>${song.title}</td>
+                <td>${song.artist}</td>
+                <td>${song.label}</td>
+                <td>${song.year}</td>
+                <td><iframe src="${song.link}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></td>
+            `;
+
+        tableBody.appendChild(row);
+      });
+    </script>
+  </body>
 </html>
