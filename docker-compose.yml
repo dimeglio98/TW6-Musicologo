@@ -9,7 +9,6 @@ services:
       - ./mongodata:/data/db
     ports:
       - 27017:27017
-    command: --quiet
 
   engine:
     build: ./engine

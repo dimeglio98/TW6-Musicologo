@@ -124,12 +124,11 @@
           login.append("password", password);
 
           const response = await fetch(url, {
-            mode: "no-cors",
             method: "POST",
             body: login,
           });
 
-          if (!response.ok) {
+          if (response.status != 200) {
             throw new Error(`Response status: ${response.status}`);
           }
 
@@ -147,12 +146,18 @@
         const username = document.getElementById("user").value;
         const password = document.getElementById("pass").value;
 
-        if (getData(username, password)) {
-          alert("Login effettuato con successo!");
-          window.location.href = "home.html";
-        } else {
-          alert("Utente e/o password non validi!");
-        }
+        getData(username, password)
+          .then((result) => {
+            if (result) {
+              alert("Login effettuato con successo!");
+              window.location.href = "home.html";
+            } else {
+              alert("Utente e/o password non validi!");
+            }
+          })
+          .catch((err) => {
+            alert("Utente e/o password non validi!");
+          });
       }
     </script>
   </head>

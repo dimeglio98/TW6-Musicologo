@@ -161,55 +161,24 @@
     </footer>
 
     <script>
-      const songs = [
-        {
-          position: 1,
-          title: "Tu ed Io",
-          artist: "Geolier",
-          label: "Universal",
-          year: 2024,
-          link: "https://open.spotify.com/embed/track/7pQA55G6kvMIaNU4UcYktA?utm_source=generator",
-        },
-        {
-          position: 2,
-          title: "Mai per Sempre",
-          artist: "Geolier",
-          label: "Universal",
-          year: 2024,
-          link: "https://open.spotify.com/embed/track/7u4Y70JYM5AO3Q45whDJbB?utm_source=generator",
-        },
-        {
-          position: 3,
-          title: "È Finita la Pace",
-          artist: "Marracash",
-          label: "Universal",
-          year: 2024,
-          link: "https://open.spotify.com/embed/track/6hBvXhUosokAqnc701pVE1?utm_source=generator",
-        },
-        {
-          position: 4,
-          title: "Again",
-          artist: "Pino Daniele",
-          label: "Sony Music",
-          year: 2024,
-          link: "https://open.spotify.com/embed/track/7hYAg4ySTj8k6p1PaHWYEj?utm_source=generator",
-        },
-        {
-          position: 5,
-          title: "Many Men",
-          artist: "50 Cent",
-          label: "Warner",
-          year: 2003,
-          link: "https://open.spotify.com/embed/track/5STdMlrBf6pqWiNE7WqxSi?utm_source=generator",
-        },
-      ];
+      async function getData() {
+        const url = "http://127.0.0.1:5000/get/songs";
 
-      const tableBody = document.querySelector("#music-table tbody");
+        const response = await fetch(url, {
+          method: "GET",
+        });
 
-      songs.forEach((song) => {
-        const row = document.createElement("tr");
+        if (response.status != 200) {
+          throw new Error(`Response status: ${response.status}`);
+        }
 
-        row.innerHTML = `
+        const songs = await response.json();
+        const tableBody = document.querySelector("#music-table tbody");
+
+        songs.forEach((song) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
                 <td>${song.position}</td>
                 <td>${song.title}</td>
                 <td>${song.artist}</td>
@@ -218,8 +187,11 @@
                 <td><iframe src="${song.link}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></td>
             `;
 
-        tableBody.appendChild(row);
-      });
+          tableBody.appendChild(row);
+        });
+      }
+
+      getData();
     </script>
   </body>
 </html>

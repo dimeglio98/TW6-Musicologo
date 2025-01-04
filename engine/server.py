@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, after_this_request
 from pymongo import MongoClient
+from flask_cors import CORS
 
 client = MongoClient("mongodb://mongodb/")
 db = client["musicologo"]
@@ -8,6 +9,8 @@ songs = db["songs"]
 concerts = db["concerts"] 
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/")
 def root():
@@ -72,11 +75,6 @@ def get_song(song_name):
 
 @app.route("/get/songs", methods=["GET"])
 def get_all_song():
-    @after_this_request
-    def add_header(response):
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
-
     song = songs.find()
     if song:
         song = list(song)
@@ -117,6 +115,16 @@ def get_concerts(artist_name):
         return jsonify(concert)
     return jsonify({"message": "Concert not found"}), 404
 
+@app.route("/get/concerts", methods=["GET"])
+def get_all_concerts():
+    concert = concerts.find()
+    if concert:
+        concert = list(concert)
+        for singleconcert in concert:
+            singleconcert["_id"] = str(singleconcert["_id"])
+        return jsonify(concert)
+    return jsonify({"message": "Concert not found"}), 404
+
 @app.route("/update/concert/<data>", methods=["POST"])
 def update_concert(data):
     jsondata = request.form
@@ -135,11 +143,6 @@ def delete_concert(data):
 
 @app.route("/login", methods=["POST"])
 def login():
-    @after_this_request
-    def add_header(response):
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
-    
     jsondata = request.form
     user = users.find_one({"username": jsondata["username"], "password": jsondata["password"]})
     if user:
